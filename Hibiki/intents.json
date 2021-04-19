@@ -1,0 +1,19 @@
+{"intents": [
+  {"tag": "greeting",
+    "patterns": ["Hi", "How are you", "Hello", "Good day"],
+    "responses": ["Hello.", "Hi there, how can I help?"],
+    "context_set": ""
+  },
+  {"tag": "goodbye",
+    "patterns": ["cya", "Goodbye", "See you later", "Have a good day"],
+    "responses": ["Goodbye", "See you later"],
+    "context_set": ""
+  },
+  {"tag": "ask_Name",
+    "patterns": ["What is your name?", "Who are you", "What are you called", "Your name is ?"],
+    "responses": ["I am Hibiki", "My name is Hibiki"],
+    "context_set": ""
+  },
+]
+
+}
