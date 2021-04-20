@@ -19,6 +19,11 @@
     "responses": ["I am Hibiki", "My name is Hibiki"],
     "context_set": ""
   },
+  {"tag": "How_many_open_orders",
+    "patterns": ["How many open orders do I have ?", "How much active orders does my account have?"],
+    "responses": ["Your account has open x orders."],
+    "context_set": ""
+  },
 ]
 
 }
