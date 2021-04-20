@@ -1,6 +1,5 @@
 #
-# An Simple 'Origin' template for a python based chatbot I can base future chatbots on.
-# Nicknamed '00 Hibiki' (Hibiki meaning echo)
+# Blye the Blue Sky Unlimited chatbot
 #
 # Author: llorrdnnight
 # Date: 18 April 2021
@@ -114,13 +113,29 @@ def chat():
         results_index = numpy.argmax(results)
         tag = labels[results_index]
 
+        '''Crossed out
         if results[results_index] > 0.7 :
         #print(tag)
+
             for tg in data["intents"]:
                 if tg['tag'] == tag:
                     responses = tg['responses']
             print(random.choice(responses))
         else:
             print("I didn't get that, try again") #maybe add this as a tag with its own set of responses
+        EOCO'''
+        #SOA
+        if results[results_index] < 0.7 :
+            tg['tag'] = 'unknown_intent'
+            for tg in data["intents"]:
+                if tg['tag'] == tag:
+                    responses = tg['responses']
+            print(random.choice(responses))
+        else:
+            for tg in data["intents"]:
+                if tg['tag'] == tag:
+                    responses = tg['responses']
+            print(random.choice(responses))
+        #EOA
 
 chat()

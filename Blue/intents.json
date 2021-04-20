@@ -1,4 +1,9 @@
 {"intents": [
+  {"tag": "unknown_intent",
+    "patterns": [],
+    "responses": ["I didn't get that, try again", "Sorry I do not understand can you rephrase ?"],
+    "context_set": ""
+  },
   {"tag": "greeting",
     "patterns": ["Hi", "How are you", "Hello", "Good day"],
     "responses": ["Hello.", "Hi there, how can I help?"],
