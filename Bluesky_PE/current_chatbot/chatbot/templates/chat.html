@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="..//static/chat.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script> 
+       
+        $(document).ready(function(){
+            $(".msg").scrollTop($(".msg")[0].scrollHeight);
+            $("#submit").click(myFunction);
+            $("#text").keypress(function (e) {
+                var key = e.which;
+                if(key == 13)  // the enter key code
+                {
+                    myFunction();
+                    $("#text").val('');
+                }
+            }); 
+        });
+        function myFunction() {
+                $searchString = $("#text").val();
+                console.log($searchString);
+                
+                $request = $.ajax({
+                    method:"GET",
+                    url: "/get",
+                    data: {search: $searchString},
+                });
+        $request.done(function(msg)
+        {
+                $(".msg").append(msg);
+                $(".msg").scrollTop($(".msg")[0].scrollHeight);
+                
+        });
+            
+         $request.fail(function(jqXHR, textStatus)
+        {
+            $(".msg").html("Request failed: " + textStatus);
+        });
+       
+    };
+    </script> 
+</head>
+<body>
+<div class="conv">  
+<div class="msg" >
+
+</div>
+</div>
+
+<div class="textarea">
+    <textarea name="msg" id="text" cols="30" rows="10"></textarea>
+    <input type="submit" value="Submit" id="submit">
+</div>
+</body>
+</html>

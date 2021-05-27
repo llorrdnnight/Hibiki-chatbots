@@ -1,0 +1,176 @@
+{"intents": [
+        {"tag": "greeting",
+         "patterns": ["Hi", "Is anyone there?", "Hello", "Hi there","Good day", "Good afternoon",  "Good evening"],
+         "responses": ["Hello. How can I help you?", "Hi there. Can I help you?"],
+         "context_set": ""
+        },
+        {"tag": "how_are_you",
+         "patterns": ["How are you?", "What's up?", "How are you doing?", "Whassup?"],
+         "responses": ["I am fine, thank you. Do you have any questions about our service??", "I am doing great. Can I help you?"]
+        },
+        {"tag": "no_answer",
+         "patterns": [],
+         "responses": ["Sorry, I can't understand you.", "Please, give me more info.", "Not sure I understand."]
+        },
+        {"tag": "options",
+         "patterns": ["How could you help me?", "What can you do?", "What help do you provide?", "How can you be helpful?", "What support is offered?"],
+         "responses": ["Do you have any questions about our service? I can help you with that. Most of times."]
+        },
+        {"tag": "help",
+         "patterns": ["I need help", "I have a problem", "There is an issue with my order", "Can you help me?"],
+         "responses": ["I will do my best to help you. Please, explain what's an issue."]
+        },
+        {"tag": "goodbye",
+         "patterns": ["Bye", "See you later", "Goodbye"],
+         "responses": ["Cheers! See you around.", "Have a nice day!", "Bye! See you."]
+        },
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "Well done", "Nicely done"],
+         "responses": ["You are welcome!", "Always welcome!"]
+        },
+        {"tag": "payments",
+         "patterns": ["Do you take credit cards?", "Do you accept Mastercard?", "Can I pay with a foreign card?", "Can I use Paypal?"],
+         "responses": ["We accept VISA, Mastercard and Bancontact.", "We accept most major international credit cards."]
+        },
+        {"tag": "types",
+         "patterns": ["What kind of packages do you ship?", "What type or orders do you ship?", "Do you ship pallettes?", "Do you send envelopes?"],
+         "responses": ["We work with palettes, envelopes and packages."]
+        },
+        {"tag": "qr_code",
+         "patterns": ["I have lost my QR", "I can't find my QR code", "I cannot scan my QR code"],
+         "responses": ["If you have any problems with a QR code, please, contact our Customer Care Team."],
+          "context_set": ["contact_customer_care"],
+          "next_tag": ["info_customer_care"]
+        },
+        {"tag": "info_customer_care",
+         "patterns": [],
+         "responses": ["Our Customer Care Team is available through customercare@bluesky.local. Provide details about your issue and information for identification."],
+          "context_filter": ["contact_customer_care"],
+          "context_set": [""]
+        },
+        {"tag": "tracking_number",
+         "patterns": ["I have lost my tracking number", "I can't find my tracking code", "My tracking number doesn't work", "There is something wrong with my tracking number"],
+         "responses": ["You can find all your tracking numbers after login. If your tracking number doesn't work you must contact our Customer Care Team."],
+          "context_set": ["contact_customer_care"],
+          "next_tag": ["info_customer_care"]
+        },
+        {"tag": "login",
+         "patterns": ["I can't login with my password and email", "I can't login", "Login doesn't work", "I forgot my password"],
+         "responses": ["Do you remember your email?"],
+          "context_set": "login_issues"
+        },
+        {"tag": "email_yes",
+         "patterns": ["Yes", "I do", "Yup"],
+         "responses": ["Write your email in the next message. I'll check what we can do."],
+          "context_filter": ["login_issues"],
+          "context_set": ["get_email"],
+          "next_tag": ["email_check"]
+        },
+        {"tag": "email_check",
+         "patterns": [],
+         "responses": ["We are checking your email.."],
+          "context_filter": ["email_checked"],
+          "metadata": ["API_CALL"]
+        },
+        {"tag": "email_call_yes",
+         "patterns": [],
+         "responses": ["You shall receive a link to reset your password soon."],
+          "context_filter": ["email_checked"],
+          "context_set": [""]
+        },
+        {"tag": "email_call_no",
+         "patterns": [],
+         "responses": ["Something is wrong with your email. Do you want to try again?"],
+          "context_filter": ["email_checked"],
+          "context_set": ["email_try_again"]
+        },
+        {"tag": "email_call_again",
+         "patterns": ["Yes", "Alright", "Let's do that", "Ok", "Okay"],
+         "responses": ["Okay."],
+          "context_filter": ["email_try_again"],
+          "context_set": ["login_issues"],
+          "next_tag": "email_yes"
+        },
+        {"tag": "email_call_again_no",
+         "patterns": ["No", "Nope", "No thanks"],
+         "responses": ["Okay."],
+          "context_filter": ["email_try_again"],
+          "context_set": ["login_issues"],
+          "next_tag": "email_no"
+        },
+        {"tag": "email_no",
+         "patterns": ["No", "I don't remember it", "Nope", "Not sure"],
+         "responses": ["Then you must contact our Customer Care Team to schedule a meeting for verification and new login information. You will need your ID."],
+          "context_filter": ["login_issues"],
+          "context_set": ["contact_customer_care"],
+          "next_tag": ["info_customer_care"]
+        },
+        {"tag": "price",
+         "patterns": ["How can I calculate the price?", "How much will it cost?", "What will be the price to ship within Europe?"],
+         "responses": ["Use our price calculator. Click here ->"]
+          },
+        {"tag": "destination",
+         "patterns": ["Where do you ship?", "Can I send my package anywhere?", "Do you send internationally?"],
+         "responses": ["We ship everywhere. Mostly. To check whether your destination is available, you must try to place an order."],
+          "context_set": ["trigger_order"],
+          "next_tag": ["trigger_order_try"]
+          },
+        {"tag": "trigger_order_try",
+         "patterns": [],
+         "responses": ["So do you want to place an order now?"],
+          "context_filter": ["trigger_order"]
+          },
+        {"tag": "trigger_order_yes",
+         "patterns": ["Yes", "Alright", "Okay", "Let's do that", "Ok"],
+         "responses": ["Nice! Click this link to place an order -> "],
+          "context_filter": ["trigger_order"],
+          "context_set": [""]
+          },
+        {"tag": "negative_answer",
+         "patterns": ["No", "Nope", "No need"],
+         "responses": ["Alright. Do you have other questions?"],
+          "context_filter": ["trigger_order", "order_status_check_number"],
+          "context_set": [""]
+          },
+        {"tag": "package_arrival",
+         "patterns": ["When will my package arrive?", "My order takes too long", "Shipping takes too much time", "Where is my order?", "My order is stuck", "My package is stuck", "It's been one month"],
+         "responses": ["Sometimes it's difficult to be patient."],
+          "context_set": ["order_status"],
+          "next_tag": ["order_status_check"]
+          },
+        {"tag": ["order_status_check"],
+         "patterns": [],
+         "responses": ["I need to check the status of your order to help you. May I proceed?"],
+          "context_filter": ["order_status"],
+          "context_set": ["order_status_check_number"]
+          },
+        {"tag": ["order_status_check_yes"],
+         "patterns": ["Yes", "Okay", "Alright", "Yeah", "Ok"],
+         "responses": ["Enter a tracking number of your order."],
+          "context_filter": ["order_status_check_number"],
+          "context_set": ["order_status_module"],
+          "metadata": ["API_CALL"]
+          },
+        {"tag": ["order_status_ok"],
+         "patterns": [],
+         "responses": ["Your order will be delivered on the"],
+          "context_filter": ["order_status_module"],
+          "context_set": [""]
+        },
+        {"tag": ["order_status_problem"],
+         "patterns": [],
+         "responses": ["There is a problem with your order."],
+          "context_filter": ["order_status_module"],
+          "metadata": ["API_CALL"],
+          "context_set": "updated_by_email",
+          "next_tag": "notification_by_email"
+          },
+
+        {"tag": "notification_by_email",
+         "patterns": [],
+         "responses": ["Our Customer Care Employees are looking into the problem. We will contact you via email to keep you updated."],
+          "context_filter": ["updated_by_email"],
+          "context_set": ""
+        }
+]
+}

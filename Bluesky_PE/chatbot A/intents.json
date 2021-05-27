@@ -1,0 +1,137 @@
+{"intents": [
+        {
+          "tag": "greeting",
+          "patterns": ["Hi", "Is anyone there?", "Hello", "Hi there","Good day", "Good afternoon",  "Good evening"],
+          "responses": ["Hello _username_.", "Hi there _username_."],
+          "required_context": ["username"],
+          "missing_context_msg": {
+            "username": ["What is your name?", "Please state your name?"]
+          }
+        },
+        {
+          "tag": "get_name",
+          "patterns": ["My name is _username_", "I'm _username_"],
+          "responses": ["Now I know your name.", "Thank you for sharing your name."],
+          "required_context": []
+        },
+        {
+          "tag": "get_order_nr",
+          "patterns": ["The order number is _orderNumber_", "It's _orderNumber_"],
+          "responses": ["Thank you"],
+          "required_context": []
+        },
+        {
+          "tag": "how_are_you",
+          "patterns": ["How are you?", "What's up?", "How are you doing?", "Whassup?"],
+          "responses": ["I am fine, thank you.", "I am doing great."],
+          "required_context": []
+        },
+        {
+          "tag": "options",
+          "patterns": ["How could you help me?", "What can you do?", "What help do you provide?", "How can you be helpful?", "What support is offered?"],
+          "responses": ["Do you have any questions about our service? I can help you with that. Most of times."],
+          "required_context": []
+        },
+        {
+          "tag": "help",
+          "patterns": ["I need help", "I have a problem", "There is an issue with my order", "Can you help me?"],
+          "responses": ["I will do my best to help you. Please, explain what's an issue."],
+          "required_context": []
+        },
+        {
+          "tag": "goodbye",
+          "patterns": ["Bye", "See you later", "Goodbye"],
+          "responses": ["Cheers! See you around.", "Have a nice day!", "Bye! See you."],
+          "required_context": [],
+          "action_after": "closeSession"
+        },
+        {
+          "tag": "thanks",
+          "patterns": ["Thanks", "Thank you", "Well done", "Nicely done"],
+          "responses": ["You are welcome!", "Always welcome!"],
+          "required_context": []
+        },
+        {
+          "tag": "payments",
+          "patterns": ["Do you take credit cards?", "Do you accept Mastercard?", "Can I pay with a foreign card?", "Can I use Paypal?"],
+          "responses": ["We accept VISA, Mastercard and Bancontact.", "We accept most major international credit cards."],
+          "required_context": []
+        },
+        {
+          "tag": "types",
+          "patterns": ["What kind of packages do you ship?", "What type or orders do you ship?", "Do you ship pallettes?", "Do you send envelopes?"],
+          "responses": ["We work with palettes, envelopes and packages."],
+          "action_after": "printHello",
+          "required_context": []
+        },
+        {
+          "tag": "qr_code",
+          "patterns": ["I have lost my QR", "I can't find my QR code", "I cannot scan my QR code", "My qr is lost"],
+          "responses": ["If you have any problems with a QR code, please, contact our Customer Care Team."],
+          "required_context": [],
+          "action_after": "printInfoCustomerCare"
+        },
+        {
+          "tag": "tracking_number",
+          "patterns": ["I have lost my tracking number", "I can't find my tracking code", "My tracking number doesn't work", "There is something wrong with my tracking number"],
+          "responses": ["You can find all your tracking numbers after login. If your tracking number doesn't work you must contact our Customer Care Team."],
+          "required_context": [],
+          "action_after": "printInfoCustomerCare"
+        },
+        {
+          "tag": "login_failed",
+          "patterns": ["I can't login with my password and email", "I can't login", "Login doesn't work", "I forgot my password"],
+          "responses": ["I'm checking your email.."],
+          "required_context": ["email"],
+          "action_after": "checkEmail",
+          "missing_context_msg": {
+            "email": ["Please give me your email and I will check"]
+          }
+        },
+        {
+          "tag": "get_email",
+          "patterns": ["_email_", "My email is _email_", "My email address is _email_", "It is _email_"],
+          "responses": ["Thank you"],
+          "required_context": []
+        },
+        {
+          "tag": "price",
+          "patterns": ["How can I calculate the price?", "How much will it cost?", "What will be the price to ship within Europe?"],
+          "responses": ["Use our price calculator. Click here ->"],
+          "required_context": [],
+          "action_after": "showPricePage"
+        },
+        {
+          "tag": "destination",
+          "patterns": ["Where do you ship?", "Can I send my package anywhere?", "Do you send internationally?"],
+          "responses": ["We ship everywhere. Mostly. To check whether your destination is available, you must try to place an order."],
+          "required_context": [],
+          "action_after": "printAskForOrder"
+        },
+        {
+          "tag": "package_arrival",
+          "patterns": ["When will my package arrive?", "My order takes too long", "Shipping takes too much time", "Where is my order?", "My order is stuck", "My package is stuck", "It's been one month"],
+          "responses": ["Sometimes it's difficult to be patient."],
+          "required_context": ["yes_no", "orderNumber"],
+          "missing_context_msg": {
+            "yes_no": ["I need to check the status of your order to help you. May I proceed?"],
+            "orderNumber": ["What is your order number?"]
+          },
+          "action_after": "packageArrival"
+        },
+        {
+          "tag": "yes",
+          "patterns": ["Yes", "Alright", "Let's do that", "Okay"],
+          "responses": ["Okay", "Alright"],
+          "required_context": [],
+          "action_after": "setContextYes"
+        },
+        {
+          "tag": "no",
+          "patterns": ["No", "Nope", "No thanks"],
+          "responses": ["Okay", "Alright"],
+          "required_context": [],
+          "action_after": "setContextNo"
+        }
+]
+}

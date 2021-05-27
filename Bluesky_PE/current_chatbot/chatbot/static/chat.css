@@ -1,0 +1,77 @@
+.textarea{
+    height: 60px; 
+    position: fixed; 
+    bottom:10px;
+    left: 5px;
+    width:100%; 
+    opacity: 1;
+}
+.textarea #text{
+    width: 89%;
+    height: 60px;
+    border-radius: 30px;
+    margin-right: 5px;
+    padding-left: 20px;
+}
+.textarea #submit{
+    background-color: lightgray;
+    position: fixed; 
+    right: 0;
+    width: 10%;
+    min-width: 75px;
+    height: 65px;
+    /* bottom: 0; */
+    border-radius: 30px;
+}
+.conv{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left:0;
+    bottom: 75px;
+
+}
+.msg{
+    overflow-y: scroll;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+   
+}
+.msg1{
+    overflow: hidden;
+    float: left;
+    margin-right: 20px;
+    margin-left: 20px;
+    background-color: lightslategray;
+    border-radius: 20px;
+    padding: 20px;
+    /*max-width: 800px;*/
+    border-radius: 20px;
+   
+}
+.msg2{
+    overflow: hidden;
+    float: right;
+    margin-right: 20px;
+    background-color: lightblue;
+    margin-left: 20px;
+    padding: 20px;
+    /*max-width: 800px;*/
+    border-radius: 20px;
+    
+}
+.incomming{
+    overflow: auto;
+    position: relative;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.outgoing{
+    overflow:auto;
+    position: relative;
+    width: 100%;
+    margin-bottom: 5px;
+
+}
